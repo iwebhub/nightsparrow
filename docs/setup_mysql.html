@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dokumentacija -- Nightsparrow</title>
+  <link rel="stylesheet" href="../template/common/base.css">
+  <style>
+    body {
+      background-color: #8EA653;
+      color: #fefefe;
+    }
+
+    a:link, a:visited {
+      color: #0B2231;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <p><a href="../">&larr; vrati se na moju stranicu</a></p>
+
+  <h1>Postavljanje MySQL baze podataka</h1>
+
+  <p>Nightsparrow zahtjeva MySQL bazu podataka -- većina dijeljenih web hosting paketa imaju mogućnost da napravite
+    jednu.</p>
+
+  <p>Ako vaš web hosting koristi cPanel, evo kako možete napraviti bazu podataka:</p>
+
+
+  <p><b>1.</b> Kada se prijavite u cPanel, nađite opciju <i>MySQL® Database Wizard</i> pod <i>Databases</i> i kliknite
+    na nju. Ovo će otvoriti čarobnjak za stvaranje databaze.</p>
+
+
+  <p><b>2.</b> U prvom koraku, stvarate databazu. U polje <i>New Database:</i> unesite ime svoje baze. Imajte na umu da
+    se puno ime vaše databaze sastoji i od dijela koji se nalazi ispred upisanog. Dakle, ako vam se ispred prostora za
+    upis pojavljuje <i>pulsir_</i> i unesete <i>baza</i> kao ime baze, <b>puno ime vaše baze podataka će biti
+      pulsir_baza</b>. Kada ste gotovi, kliknite na <i>Create Database</i>. Zapišite što ste upisali.</p>
+
+
+  <p><b>3.</b> U drugom koraku, stvaramo korisnika za databazu. Pod <i>Username:</i> unesite ime korisnika za svoju
+    bazu. Imajte na umu da se puno ime korisnika sastoji i od dijela koji se nalazi ispred upisanog. Dakle, ako vam se
+    ispred prostora za upis pojavljuje <i>pulsir_</i> i unesete <i>ivica</i> kao ime korisnika, <b>puno ime vašeg
+      korisnika za bazu podataka će biti pulsir_ivica</b>. U iduće polje, <i>Password:</i> unesite lozinku za svog
+    korisnika, te ju ponovite u sljedećem polju. Kada ste gotovi, kliknite na <i>Create User</i>. Zapišite što ste
+    upisali.</p>
+
+
+  <p><b>4.</b> U trećem koraku, potrebno je odrediti ovlasti za MySQL korisnika. Ako niste upoznati sa SQL
+    privilegijama, označite <i>ALL PRIVILEGES</i> i kliknite na <i>Next Step</i>. Ako razumijete kako funkcioniraju SQL
+    privilegije, dodajte koje su vam potrebne i nastavite.</p>
+
+
+  <p><b>5.</b> Databaza je sad stvorena. Podatke koje ste unijeli u čarobnjak sada unesite u instalacijski program.
+    Također je potrebno unijeti MySQL server kojem Nightsparrow će pristupati. Ako ovo ne znate, pokušajte unijeti <i>localhost</i>.
+    Ako to ne uspije, upitajte svog pružatelja web hostinga za informacije o MySQL serveru.</p>
+
+
+  <p> Ako budete imali problema s nekim od koraka kod dodavanja databaze ili vaš pružatelj web hostinga ne koristi
+    cPanel, molimo da se obratite vašem web hosting provideru. </p>
+
+</div>
+</body>
+</html>

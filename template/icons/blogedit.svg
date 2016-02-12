@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="545px" height="473px" viewBox="0 0 545 473" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.0.4 (8054) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <text id="Lorem-ipsum" sketch:type="MSTextLayer" font-family="Source Sans Pro" font-size="72" font-weight="260" fill="#000000">
+            <tspan x="77" y="123">Lorem ipsum</tspan>
+            <tspan x="77" y="214">dolor sit amet, </tspan>
+            <tspan x="77" y="305">consectetur </tspan>
+            <tspan x="77" y="396">adipscing elit.</tspan>
+        </text>
+        <g id="Pencil" sketch:type="MSLayerGroup" transform="translate(225.500000, 261.000000) rotate(33.000000) translate(-225.500000, -261.000000) translate(212.000000, 23.000000)">
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" x="0" y="20.0421053" width="27" height="405.852632"></rect>
+            <path d="M0,425.894737 L27,425.894737 L13.5,476 L0,425.894737 Z" id="Triangle-1" fill="#606060" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-2" fill="#D8D8D8" sketch:type="MSShapeGroup" x="0" y="15.0315789" width="27" height="5.01052632"></rect>
+            <rect id="Rectangle-3" fill="#F28CC7" sketch:type="MSShapeGroup" x="0" y="0" width="27" height="16.7017544"></rect>
+        </g>
+    </g>
+</svg>

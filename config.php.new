@@ -1,0 +1,7 @@
+<?php
+define('rootdirpath', '@@nightsparrow-directory@@');
+define('domainpath', '@@nightsparrow-domain-path@@');
+define('mysql_user', '@@nightsparrow-mysql-user@@');
+define('mysql_database', '@@nightsparrow-mysql-db@@');
+define('mysql_password', '@@nightsparrow-mysql-pw@@');
+define('mysql_server', '@@nightsparrow-mysql-srv@@');
