@@ -10,6 +10,8 @@ Autor projekta: Mario Borna Mjertan, Gimnazija Požega; mentorica: Sanja Grabusi
 
 Ova verzija sustava Nightsparrow namijenjena je za Infokup te je na njoj još potrebno rada prije prvog javnog releasea, iako će ova verzija biti demonstrirana na Infokupu. 
 
+Do državnog natjecanja, kod neće biti mijenjan te će pull requestovi biti na čekanju kako bi se poštovale Propozicije.
+
 ---------
 
 https://www.infokup.hr/projekt/383/Nightsparrow
