@@ -519,7 +519,7 @@ class Nightsparrow {
 
         if ($caller == 'admin') {
           if ($subpg > 3){
-            echo '<li class="collection-item avatar indent"> <i class="mdi-image-navigate-next blue lighten-2 circle"></i><span class="title">Ova stranica ima djecu.</span> <a href="index.php?showSubstructureMap=' . $this->getPageAPI($row['slug'])['parent'] . '">Prikaži substrukturu</a></i>';
+            echo '<li class="collection-item avatar indent"> <i class="mdi-image-navigate-next blue lighten-2 circle"></i><span class="title">Ova stranica ima djecu.</span> <a href="index.php?showSubstructureMap=' . $row['id'] . '">Prikaži substrukturu</a></i>';
           }
           else {
             echo '<li class="collection-item avatar indent">
@@ -528,7 +528,7 @@ class Nightsparrow {
              <p>' . $summary . '<br> <b>Autor: </b>' . $author . '</p>
              <span class="secondary-content"><a href="add.php?update=' . $slug . '"><i class="mdi-editor-mode-edit"></i></a> <a href="index.php?setAsHomepage=' . $slug . '&csrfToken=' . $csrfToken . '"><i class="material-icons" style="font-size:16px;">home</i></a><a href="add.php?parent=' . $slug . '"><i class="material-icons" style="font-size:16px;">note_add</i></a></span></li>';
              if($this->countNumberOfChildPages($row['id']) > 0){
-               echo '<li class="collection-item avatar indent"> <i class="mdi-image-navigate-next blue lighten-2 circle"></i><span class="title">Ova stranica ima djecu.</span> <a href="index.php?showSubstructureMap=' . $this->getPageAPI($row['slug'])['parent'] . '">Prikaži substrukturu</a></i>';
+               echo '<li class="collection-item avatar indent"> <i class="mdi-image-navigate-next blue lighten-2 circle"></i><span class="title">Ova stranica ima djecu.</span> <a href="index.php?showSubstructureMap=' . $row['id'] . '">Prikaži substrukturu</a></i>';
              }
           }
 
