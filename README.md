@@ -1,17 +1,17 @@
 # Nightsparrow
 
-Sustav za jednostavnu izradu i upravljanje sadržajem web-stranica.
+Create and manage websites without losing your mind.
 
-Nightsparrow je prilagođen svakoj vrsti korisnika: od početnika do web programera.
+Nightsparrow makes building and managing websites easy.
 
-Autor projekta: Mario Borna Mjertan, Gimnazija Požega; mentorica: Sanja Grabusin, prof.
+## The state of this project
 
-## Stanje ovog projekta
+Nightsparrow was built for Infokup 2016. and it's still in development. Although this version was demonstrated on Infokup, we still need to polish some things before the first stable public release. We'll publish a timeline soon*ish*, but feel free to contribute anything you want to the project.
 
-Ova verzija sustava Nightsparrow namijenjena je za Infokup te je na njoj još potrebno rada prije prvog javnog releasea, iako će ova verzija biti demonstrirana na Infokupu. 
+### So how did Infokup go?
 
-Do državnog natjecanja, kod neće biti mijenjan te će pull requestovi biti na čekanju kako bi se poštovale Propozicije.
+Nightsparrow came in fourth, but hey, One Direction didn't win on The X Factor either.
 
 ---------
 
-https://www.infokup.hr/projekt/383/Nightsparrow
+Infokup project page: https://www.infokup.hr/projekt/383/Nightsparrow
