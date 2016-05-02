@@ -75,8 +75,8 @@
     <input type="email" name="email" placeholder="Email adresa" class="form-control" required>
     <input type="password" name="password" placeholder="Lozinka" class="form-control" required>
     <button class="btn btn-lg btn-primary btn-block">Prijavite se</button>
-    <a href="login.php?action=resetpassword">Zaboravili ste lozinku?</a> &middot;
-    <a href="register.php">Registracija</a>
+    <a href="login.php?action=resetpassword">Zaboravili ste lozinku?</a>
+    <?php if($ns->getSettingValue('core', 'publicRegistrationEnabled') == 1){ echo '&middot; <a href="register.php">Registracija</a>'; } ?>
   </form>
 </div>
 </body>

@@ -3,6 +3,11 @@ include_once 'config.php';
 include_once 'inc/nightsparrow-main.php';
 $ns = new Nightsparrow;
 $msg = null;
+
+if ($ns->getSettingValue('core', 'publicRegistrationEnabled') != 1){
+  die($ns->throwError('forbidden'));
+}
+
 if (isset($_COOKIE['nightsparrowSession'])) {
   if (!isset($_COOKIE['sessionInvalid'])) {
     $returnloc = domainpath . $_GET['return'];
