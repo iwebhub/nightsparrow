@@ -90,13 +90,11 @@
 
     <p>
       <input type="checkbox" class="showinnav" name="showinnav" value="1"
-             id="showinnav" <?php if (isset($_GET['parent'])) {
+             id="showinnav" <?php if (isset($_GET['parent']) || isset($_POST['parent'])) {
         echo '';
       } elseif (!isset($data) || ($data['showinnav'] != 0)) {
         echo 'checked="checked"';
-      } else {
-        echo 'checked="false"';
-      } ?> />
+      }  ?> />
       <label for="showinnav">Prikaži u navigaciji ako je stranica javna</label>
     </p>
 

@@ -1144,6 +1144,7 @@ class Nightsparrow {
 
 
   function sendEmail($email, $title, $template, $values) {
+
     $template = file_get_contents(rootdirpath . 'template/email/' . $template);
     foreach ($values as $name => $value) {
       $varcall = '{{' . $name . '}}';
@@ -1153,7 +1154,10 @@ class Nightsparrow {
     //var_dump($title, $template);
     $email = strip_tags($email);
     $headers = "MIME-Version: 1.0\r\n";
-    $headers .= 'Content-Type: text/html; charset=UTF-8\r\n';
+    $charset = mb_detect_encoding($template);
+    $headers .= 'Content-Type: text/html;charset=iso-8859-1\r\n';
+
+
     $res = mb_send_mail($email, $title, $template, $headers);
     /**
     * Ako je Nightsparrow instaliran na serveru koji nema konfigurirano slanje e-mailova, poput, *
