@@ -117,9 +117,9 @@ class Nightsparrow {
 
   /** error handling. :D 0x010010 = neuspješna radnja s databazom **/
   function throwError($errcode) {
-   /** debugging alati: $trace = debug_backtrace();
+/**
+    $trace = debug_backtrace();
     $caller = $trace[1];
-
     var_dump($trace);**/
     switch ($errcode) {
       case '0x010010':
@@ -1060,11 +1060,17 @@ class Nightsparrow {
   function deleteAllSessions($user) {
     $dbconn = $this->mysqliConnect();
     $user = $dbconn->real_escape_string($user);
-    $res = $dbconn->query("DELETE FROM nb_sessions WHERE user = '$user'") or die($dbconn->error . $this->throwError(0x010010));
+    if($_COOKIE['ns_sid'] != 'loggedout') {
+      $subject = $this->getSessionUser($_COOKIE['ns_sid']);
+    }
+    else{
+      $subject = $user;
+    }
+    $res = $dbconn->query("DELETE FROM nb_sessions WHERE user = '$user'");
     $time = $dbconn->real_escape_string(time());
     $ip = $dbconn->real_escape_string($_SERVER['REMOTE_ADDR']);
-    $subject = $this->getSessionUser($_COOKIE['ns_sid']);
     $sql = "INSERT INTO nb_securitylogs VALUES (null, 'user:DeleteAllSessions', '$subject', '$user', '$time', '$ip')";
+    $res = $dbconn->query($sql);
     $dbconn->close();
 
   }
@@ -1156,19 +1162,19 @@ class Nightsparrow {
     $domain = $_SERVER['SERVER_NAME'];
     $headers = "From: ".$this->getSettingValue('core', 'siteName')." (obavijesti)"." <noreply.notifications@".$domain.">\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
-    //$charset = mb_detect_encoding($template);
     $headers .= 'Content-Type: text/html;charset=UTF-8\r\n';
 
 
     $res = mail($email, $title, $template, $headers);
+    //echo $template;
+
     /**
     * Ako je Nightsparrow instaliran na serveru koji nema konfigurirano slanje e-mailova, poput, *
-    * recimo, svakog lokalnog servera, nećete biti u mogućnosti primiti poruku koju Nightsparrow "pošalje". *
+    * recimo, gotovo svakog lokalnog servera, nećete biti u mogućnosti primiti poruku koju Nightsparrow "pošalje". *
     * Ako želite isprobati ovu funkcionalnost na način da Nightsparrow prikaže e-mail u pregledniku, zakomentirajte liniju *
-    * $res = mb_send_mail($email, $title, $template, $headers); *
-    * i odkomentirajte liniju *
-    * //var_dump($title, $template); *
-    */
+    * $res = mail(...) *
+    * i odkomentirajte liniju
+    * echo $template; */
   }
 
 
@@ -1195,19 +1201,10 @@ class Nightsparrow {
 
     }
 
-
-    /**$arr = str_split('ABCDEFGHIJKLMNOPRSTUVZQYabcdefghijklmnoprstuvzqy1234567890');
-     * shuffle($arr);
-     * $arr = array_slice($arr, 0, rand(3, 58));
-     * $r = implode('', $arr);
-     * $uus = '$2a$07$' . $r . '$';**/
-    $uus = null;
-
-    $password = crypt($password, $uus);
     $password = password_hash($password, PASSWORD_DEFAULT);
     $password = $dbconn->real_escape_string($password);
 
-    $sql = "UPDATE nb_users SET password = '$password', salt = '$uus' WHERE id = '$user'";
+    $sql = "UPDATE nb_users SET password = '$password' WHERE id = '$user'";
 
     $res = $dbconn->query($sql);
 
@@ -1219,8 +1216,8 @@ class Nightsparrow {
 
     $sql = "INSERT INTO nb_securitylogs VALUES (null, 'passwordChange:Reset', '$user', '$user', '$time', '$ip')";
     $res = $dbconn->query($sql);
-    $this->deleteAllSessions($user);
     echo 'Lozinka promijenjena';
+    $this->deleteAllSessions($user);
     $dbconn->close();
 
   }
@@ -1314,18 +1311,19 @@ class Nightsparrow {
       $this->throwError(0xAA4A); 
     }
     $reset = $res->fetch_array();
+    $dbconn->close();
+
     $t1 = time();
-    $t2 = $reset['time'] + 2 * 60;
+    $t2 = $reset['time'] + 2 * 60 * 60;
+
     if ($reset['used'] == 1) {
       return 0;
-    } elseif (($t1 - $t2) < 0) {
+    } elseif (($t2-$t1) > 2*60*60) {
 
       return 0;
     } else {
       return 1;
     }
-    $dbconn->close();
-
   }
 
   function getComments($page){

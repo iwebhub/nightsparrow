@@ -51,10 +51,12 @@ if ((isset($_POST['email']) || (isset($_POST['token'])))) {
   }
 } elseif (isset($_GET)) {
   if (isset($_GET['token'])) {
-
     if ($ns->passwordResetTokenValid($_GET['token']) == true) {
-
       echo '<form action="password.php" method="post"><input type="hidden" name="token" value="' . strip_tags($_GET['token']) . '"><input type="password" name="password" placeholder="Nova lozinka..."><input type="submit">';
+    }
+    else{
+      echo 'Nevaljan token.';
+      die();
     }
   } else {
     die(header('Location: login.php?action=resetpassword'));
