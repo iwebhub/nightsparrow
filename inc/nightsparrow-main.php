@@ -1153,12 +1153,14 @@ class Nightsparrow {
     }
     //var_dump($title, $template);
     $email = strip_tags($email);
-    $headers = "MIME-Version: 1.0\r\n";
-    $charset = mb_detect_encoding($template);
-    $headers .= 'Content-Type: text/html;charset=iso-8859-1\r\n';
+    $domain = $_SERVER['SERVER_NAME'];
+    $headers = "From: ".$this->getSettingValue('core', 'siteName')." (obavijesti)"." <noreply.notifications@".$domain.">\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    //$charset = mb_detect_encoding($template);
+    $headers .= 'Content-Type: text/html;charset=UTF-8\r\n';
 
 
-    $res = mb_send_mail($email, $title, $template, $headers);
+    $res = mail($email, $title, $template, $headers);
     /**
     * Ako je Nightsparrow instaliran na serveru koji nema konfigurirano slanje e-mailova, poput, *
     * recimo, svakog lokalnog servera, nećete biti u mogućnosti primiti poruku koju Nightsparrow "pošalje". *
