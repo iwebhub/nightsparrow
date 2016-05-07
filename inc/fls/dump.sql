@@ -256,7 +256,7 @@ CREATE TABLE `nb_settings` (
   `id`     INT(11)      NOT NULL AUTO_INCREMENT,
   `engine` VARCHAR(140) NOT NULL,
   `setkey` VARCHAR(140) NOT NULL,
-  `value`  VARCHAR(140) NOT NULL,
+  `value`  VARCHAR(2048) NOT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
