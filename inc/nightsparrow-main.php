@@ -117,10 +117,11 @@ class Nightsparrow {
 
   /** error handling. :D 0x010010 = neuspješna radnja s databazom **/
   function throwError($errcode) {
-/**
-    $trace = debug_backtrace();
-    $caller = $trace[1];
-    var_dump($trace);**/
+    if(nsEnvironment == 'development') {
+      $trace = debug_backtrace();
+      $caller = $trace[1];
+      var_dump($trace);
+    }
     switch ($errcode) {
       case '0x010010':
         include rootdirpath . 'template/errors/db.php';
@@ -215,13 +216,12 @@ class Nightsparrow {
     $r = implode('', $arr);
     $csrf = $dbconn->real_escape_string(crypt($r));
 
-    $arr = str_split('ABCDEFGHIJKLMNOPRSTUVZQYabcdefghijklmnoprstuvzqy1234567890');
-    shuffle($arr);
-    $arr = array_slice($arr, 0, rand(7, 58));
-    $x = implode('', $arr);
-    setcookie('ns_sessionx', $x, time() + 259200, null, null, null, true);
-    $cid = md5($x . $ip . $useragent);
-    $sql = "INSERT INTO nb_sessions VALUES (null, '$user', '$ip', '$useragent', '$time', '$expon', '$csrf', '$cid')";
+
+    $x = bin2hex(openssl_random_pseudo_bytes(32));
+
+    setcookie("ns_sessionx", $x, (time() +(60 * 60 * 24 * 3)), null, null, null, true);
+
+    $sql = "INSERT INTO nb_sessions VALUES (null, '$user', '$ip', '$useragent', '$time', '$expon', '$csrf', '$x')";
     $res = $dbconn->query($sql);
     $id = $dbconn->insert_id;
 
@@ -255,11 +255,17 @@ class Nightsparrow {
     foreach ($sessions as $session) {
       if ($session['expires'] < time()) {
         return false; // UNIX timestamp trenutnog vremena je veći od UNIX timestampa vremena isteka sesije -- sesija je istekla, vraćamo false
-      } elseif ($session['useragent'] != $useragent) {
+      }
+      elseif ($session['useragent'] != $useragent) {
         return false; // user agent nije isti, možemo pretpostaviti da se ne radi o istom pregledniku, postoji šansa da je netko iskopirao sesiju
-      } elseif ($session['ip'] != $ip) {
+      }
+      elseif ($session['ip'] != $ip) {
         return false; // ip nije isti. najvjerojatnije se nekomu ruter resetirao ili ima problema s mrežom, no radi sigurnosti je bolje poništiti sesiju ako se dogodi promjena ip adrese.
-      } else {
+      }
+      elseif ($_COOKIE['ns_sessionx'] != $session['cookieid']){
+        return false; // gledamo sigurnosni token :D
+      }
+      else {
         return true; // ako su useragent, ip i vrijeme u redu, pretpostavimo da je sve ok i potvrdimo sesiju
       }
     }

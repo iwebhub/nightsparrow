@@ -5,3 +5,5 @@ define('mysql_user', '@@nightsparrow-mysql-user@@');
 define('mysql_database', '@@nightsparrow-mysql-db@@');
 define('mysql_password', '@@nightsparrow-mysql-pw@@');
 define('mysql_server', '@@nightsparrow-mysql-srv@@');
+define('nsCoreLanguage', 'hr');
+define('nsEnvironment', 'production');

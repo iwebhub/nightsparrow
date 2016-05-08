@@ -12,14 +12,20 @@ if (isset($_COOKIE['nightsparrowSession'])) {
 
 if (isset($_GET['action'])) {
   if ($_GET['action'] == 'logout') {
-    $code = $ns->deleteSession($_COOKIE['ns_sid'], $_COOKIE['ns_sessionx'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
+    $status = $ns->validateUserSession($_COOKIE['ns_sid'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], time());
+    if($status == true){
+      $code = $ns->deleteSession($_COOKIE['ns_sid'], $_COOKIE['ns_sessionx'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
+    }
+    else{
+      $msg = '<div class="alert alert-warning">Dogodila se pogreška (0xEE1A01).</div>';
+    }
     if ($code == 0) {
       $msg = '<div class="alert alert-success">Odjavljeni ste.</div>';
     } else {
       $msg = '<div class="alert alert-warning">Dogodila se pogreška (0xEE1A00).</div>';
     }
-    setcookie('ns_sid', 'loggedout', 0, null, null, null, true);
-    setcookie('ns_sessionx', 'loggedout', 0, null, null, null, true);
+    setcookie('ns_sid', 'loggedout', time()-2700, null, null, null, true);
+    setcookie('ns_sessionx', 'loggedout', time()-2700, null, null, null, true);
   }
   if ($_GET['action'] == 'resetpassword') {
     include_once 'template/common/passwordreset.php';
