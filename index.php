@@ -56,8 +56,7 @@ elseif ($routeSegments[0] == 'api') {
 }
 else
  {
-  $ns->throwError('notfound');
-  die();
+  $ns->gen->PageViewGenerator(end($routeSegments), $activeTheme);
 }
 
 if($ns->getSettingValue("pluginManager", "pluginManager:Enabled") == 1){

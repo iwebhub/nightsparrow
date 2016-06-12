@@ -7,8 +7,9 @@ U projektu Nightsparrow korištene su razne biblioteke otvorenog koda:
 	* Bulletproof
 	* SpeakingURL.js
 	* Wildbit email predlošci (wildbit/postmark-templates na GitHubu)
+	* PhpUserAgent autora Jesse G. Donat (donatj/PhpUserAgent na GitHubu)
 
-Njihove licence nalaze se u nastavku. 
+Njihove licence nalaze se u nastavku ili u pripadajućim direktorijima.
 
 Također, Nightsparrow ovisi o otvorenim tehnologijama kao što su PHP, MySQL (i MySQLi driver), HTML 5 i OpenSSL.
 

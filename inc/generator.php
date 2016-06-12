@@ -223,4 +223,14 @@ class PageGenerator extends Nightsparrow {
 
 		return $navTemp;
 	}
+
+	function generateSessionsTable($sessions){
+    $n = count($sessions);
+    echo 'Active sessions ('.$n.') <a href="index.php?deleteAllSessions=self">Terminate all</a>';
+    echo '<table><tr><th>User</th><th>Time</th><th>Expires</th><th>Actions</th></tr>';
+    foreach ($sessions as $session) {
+    	var_dump($session);
+    	echo '<tr><td>'.$ns->getUserRealname($session['user']).'</td><td>'.$session['time'].'</td><td>'.$session['expires'].'</td><td><a href="?deleteSession='.$session['id'].'&csrfToken=">Terminate</a> &middot; <a href="#more">Get data</a>';    
+    }
+  }
 }

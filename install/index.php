@@ -8,7 +8,12 @@ $install = new Installer();
 $dir = dirname(__FILE__); // koja je putanja do foldera
 $dir = str_replace('install', '', $dir); // izbacimo install do foldera
 $dir = addslashes($dir); // jer Windows postoji, svima nama na žalost
-$domain = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+if (($_SERVER['HTTPS'] == null) || ($_SERVER['HTTPS'] == 'off')) {
+  $protocol = 'http://';
+} else {
+  $protocol = 'https://';
+}
+$domain = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 $domain = str_replace('install/index.php', '', $domain); // koja nam je domena i putanja do instalacije?
 $configfile = file_get_contents('../config.php.new'); // učitajmo predložak za instalaciju
 $configfile = str_replace('@@nightsparrow-directory@@', $dir, $configfile); // zamjena placeholdera

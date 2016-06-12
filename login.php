@@ -3,6 +3,15 @@ include_once 'config.php';
 include_once 'inc/nightsparrow-main.php';
 $ns = new Nightsparrow;
 $msg = null;
+
+if(!isset($_COOKIE['ns_csrf_anon'])){
+  $canon = bin2hex(openssl_random_pseudo_bytes(32));
+  setcookie('ns_csrf_anon', $canon, time()+60*60, null, null, null, true);
+}
+else{
+  $canon = $_COOKIE['ns_csrf_anon'];
+}
+
 if (isset($_COOKIE['nightsparrowSession'])) {
   if (!isset($_COOKIE['sessionInvalid'])) {
     $returnloc = domainpath . $_GET['return'];
@@ -13,7 +22,7 @@ if (isset($_COOKIE['nightsparrowSession'])) {
 if (isset($_GET['action'])) {
   if ($_GET['action'] == 'logout') {
     $status = $ns->validateUserSession($_COOKIE['ns_sid'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], time());
-    if($status == true){
+    if($status == true && $_GET['csrfToken'] == $ns->getSessionCSRF($_COOKIE['ns_sid'])){
       $code = $ns->deleteSession($_COOKIE['ns_sid'], $_COOKIE['ns_sessionx'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
     }
     else{
@@ -49,14 +58,19 @@ if (isset($_POST)) {
       }
       $dv = $ns->checkPassword($_POST['email'], $_POST['password']);
       if ($dv == true) {
-        $sessionid = $ns->setUserSession($_POST['email'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
-        setcookie('ns_sid', $sessionid, (time() + (60 * 60 * 24 * 3)), null, null, null, true);
+        if($_COOKIE['ns_csrf_anon'] == $_POST['csrfToken']) {
+          $sessionid = $ns->setUserSession($_POST['email'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT']);
+          setcookie('ns_sid', $sessionid, (time() + (60 * 60 * 24 * 3)), null, null, null, true);
+          echo '<script type="text/javascript">window.location = "' . domainpath . $_POST['return'] . '"</script>';
 
+          $msg = '<div class="alert alert-success">Prijavljeni ste! :D <a href="' . $_POST['return'] . '">Kliknite ovdje kako biste nastavili &rarr;</a></div>';
 
-        echo '<script type="text/javascript">window.location = "' . domainpath . $_POST['return'] . '"</script>';
+        }
+        else{
+      $msg = '<div class="alert alert-warning">Dogodila se pogreška (0xEE1A01).</div>';
+        }
 
-        $msg = '<div class="alert alert-success">Prijavljeni ste! :D <a href="' . $_POST['return'] . '">Kliknite ovdje da bi nastavili &rarr;</a></div>';
-      } else {
+       } else {
         $msg = '<div class="alert alert-info" role="alert">Podatci za pristup nisu valjani. Pokušajte ponovno.</div>';
         $ns->setUserSession($_POST['email'], '0.0.0.0', 'FAILED_ATTEMPT_NIGHTSPARROW_LOGIN');
       }

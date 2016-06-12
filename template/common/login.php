@@ -72,6 +72,7 @@
     } else {
       echo 'admin/index.php';
     } ?>">
+    <input type="hidden" name="csrfToken" value="<?php echo $canon; ?>">
     <input type="email" name="email" placeholder="Email adresa" class="form-control" required>
     <input type="password" name="password" placeholder="Lozinka" class="form-control" required>
     <button class="btn btn-lg btn-primary btn-block">Prijavite se</button>
