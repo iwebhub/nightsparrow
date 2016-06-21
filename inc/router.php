@@ -1,5 +1,6 @@
 <?php
 
-class Nightrouter {
+class Nightrouter
+{
 
 }

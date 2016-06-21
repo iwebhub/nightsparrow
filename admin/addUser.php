@@ -7,13 +7,13 @@ $ns = new Nightsparrow;
 $status = $ns->validateUserSession($_COOKIE['ns_sid'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], time());
 
 if ($status !== true) {
-  die(header('Location: ' . domainpath . 'login.php'));
+    die(header('Location: ' . domainpath . 'login.php'));
 }
 /** now, let's check the privilege level! **/
 $neededPrivilege = $ns->getSettingValue('core', 'adminPanelManageNonselfUser');
 $actualPrivilege = $ns->getUserPrivilege($ns->getSessionUser($_COOKIE['ns_sid']));
 if ($actualPrivilege < $neededPrivilege) {
-  $ns->throwError(0x403403);
+    $ns->throwError(0x403403);
 }
 $loggedInUser = $ns->getUserRealname($ns->getSessionUser($_COOKIE['ns_sid']));
 $userID = $ns->getSessionUser($_COOKIE['ns_sid']);

@@ -6,13 +6,13 @@ $ns = new Nightsparrow;
 $status = $ns->validateUserSession($_COOKIE['ns_sid'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], time());
 
 if ($status !== true) {
-  die(header('Location: ' . domainpath . 'login.php'));
+    die(header('Location: ' . domainpath . 'login.php'));
 }
 /** now, let's check the privilege level! **/
 $neededPrivilege = $ns->getSettingValue('core', 'adminPanelPermissionSettingsManager');
 $actualPrivilege = $ns->getUserPrivilege($ns->getSessionUser($_COOKIE['ns_sid']));
 if ($actualPrivilege < $neededPrivilege) {
-  $ns->throwError(0x403403);
+    $ns->throwError(0x403403);
 }
 $pageTitle = 'Postavke';
 
@@ -34,8 +34,6 @@ $data['headerContent'] = $ns->getSettingValue('design', 'headerContent');
 $data['footerContent'] = $ns->getSettingValue('design', 'footerContent');
 $data['logoLink'] = $ns->getSettingValue('design', 'logoLink');
 $data['publicAPIStatus'] = $ns->getSettingValue('core', 'disablePublicAPI');
-
-
 
 
 include '../template/admin/header.php';

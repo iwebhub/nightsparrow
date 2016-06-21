@@ -50,7 +50,7 @@
   right: 5px;
 }
 
-.indent{
+.indent {
   margin-left: 5% !important;
   border-left: solid 3px #4AABED;
 }
@@ -79,6 +79,6 @@
   box-shadow: 0 27px 24px 0 rgba(0, 0, 0, .2), 0 40px 77px 0 rgba(0, 0, 0, .22)
 }
 
-.collection{
+.collection {
   background-color: #ffffff;
 }

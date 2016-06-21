@@ -6,24 +6,24 @@ $ns = new Nightsparrow;
 $status = $ns->validateUserSession($_COOKIE['ns_sid'], $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], time());
 
 if ($status !== true) {
-  die(header('Location: ' . domainpath . 'login.php'));
+    die(header('Location: ' . domainpath . 'login.php'));
 }
 /** now, let's check the privilege level! **/
 $neededPrivilege = $ns->getSettingValue('core', 'adminPanelPermissionUserListViewer');
 $actualPrivilege = $ns->getUserPrivilege($ns->getSessionUser($_COOKIE['ns_sid']));
 if ($actualPrivilege < $neededPrivilege) {
-  $ns->throwError(0x403403);
+    $ns->throwError(0x403403);
 }
 $edit_neededPrivilege = $ns->getSettingValue('core', 'adminPanelPermissionManageNonselfUser');
 $edit_actualPrivilege = $ns->getUserPrivilege($ns->getSessionUser($_COOKIE['ns_sid']));
 if ($edit_actualPrivilege < $edit_neededPrivilege) {
-  $canEdit = false;
+    $canEdit = false;
 } else {
-  $canEdit = true;
+    $canEdit = true;
 }
 
 if ($canEdit == false) {
-  echo '<div class="card-panel"><span class="blue-text text-darken-2"> Nemate pravo uređivati korisnike osim sebe.</span></div>';
+    echo '<div class="card-panel"><span class="blue-text text-darken-2"> Nemate pravo uređivati korisnike osim sebe.</span></div>';
 }
 
 $loggedInUser = $ns->getUserRealname($ns->getSessionUser($_COOKIE['ns_sid']));

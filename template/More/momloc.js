@@ -239,7 +239,7 @@
     for (b = 0, c = d.length; c > b; b++)d[b] = rc[d[b]] ? rc[d[b]] : N(d[b]);
     return function (e) {
       var f = "";
-      for (b = 0; c > b; b++)f += d[b]instanceof Function ? d[b].call(e, a) : d[b];
+      for (b = 0; c > b; b++)f += d[b] instanceof Function ? d[b].call(e, a) : d[b];
       return f
     }
   }
@@ -890,7 +890,7 @@
       m: f(i[6]),
       s: f(i[7]),
       w: f(i[8])
-    }) : null == h ? h = {} : "object" == typeof h && ("from"in h || "to"in h) && (g = t(vb(h.from), vb(h.to)), h = {}, h.ms = g.milliseconds, h.M = g.months), e = new n(h), vb.isDuration(a) && c(a, "_locale") && (e._locale = a._locale), e
+    }) : null == h ? h = {} : "object" == typeof h && ("from" in h || "to" in h) && (g = t(vb(h.from), vb(h.to)), h = {}, h.ms = g.milliseconds, h.M = g.months), e = new n(h), vb.isDuration(a) && c(a, "_locale") && (e._locale = a._locale), e
   }, vb.version = yb, vb.defaultFormat = gc, vb.ISO_8601 = function () {
   }, vb.momentProperties = Kb, vb.updateOffset = function () {
   }, vb.relativeTimeThreshold = function (b, c) {
