@@ -5,12 +5,10 @@
 include_once 'inc/nightsparrow-main.php';
 include_once 'inc/database-display.php';
 include_once 'inc/generator.php';
-include_once 'inc/router.php';
 include_once 'inc/APIHandler.php';
 
 $ns = new Nightsparrow;
 $ns->gen = new PageGenerator;
-$router = new Nightrouter;
 $api = new APIHandler;
 
 
