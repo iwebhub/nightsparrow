@@ -19,7 +19,7 @@ if (!file_exists('config.php') && !file_exists('install/install.lock')) {
     header('Location: install/index.php');
 }
 if (!file_exists('config.php') && file_exists('install/install.lock')) {
-    die($ns->throwError('0xCFAA'));
+    die($ns->throwError('missingConfig'));
 }
 
 

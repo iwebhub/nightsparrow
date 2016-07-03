@@ -12,7 +12,7 @@ class Nightsparrow
     {
         $dbconn = new mysqli(mysql_server, mysql_user, mysql_password, mysql_database);
         if ($dbconn->connect_error) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
 
         return $dbconn;
@@ -52,8 +52,7 @@ class Nightsparrow
         $addUserQuery = "INSERT INTO nb_users VALUES(null, '$email', '$password', '$uus', '$name', '$level', 0, false, '$currentTime')";
         $res = $dbconn->query($addUserQuery);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         $dbconn->close();
 
@@ -73,8 +72,7 @@ class Nightsparrow
         $res = $dbconn->query($addSettingQuery);
 
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         $dbconn->close();
 
@@ -84,7 +82,7 @@ class Nightsparrow
     function getAllUsers()
     {
         $dbconn = $this->mysqliConnect();
-        $res = $dbconn->query("SELECT * FROM nb_users") or die($dbconn->error . $this->throwError(0x010010));
+        $res = $dbconn->query("SELECT * FROM nb_users") or die($dbconn->error . $this->throwError('databaseError'));
         $res->data_seek(0);
         while ($row = $res->fetch_row()) {
             return ($row);
@@ -93,7 +91,7 @@ class Nightsparrow
 
     }
 
-    /** error handling. :D 0x010010 = neuspješna radnja s databazom **/
+    /** error handling. :D 'databaseError' = neuspješna radnja s databazom **/
     function throwError($errcode)
     {
         if (nsEnvironment == 'development') {
@@ -102,7 +100,7 @@ class Nightsparrow
             var_dump($trace);
         }
         switch ($errcode) {
-            case '0x010010':
+            case 'databaseError':
                 include rootdirpath . 'template/errors/db.php';
                 die();
                 break;
@@ -117,18 +115,13 @@ class Nightsparrow
                 die();
                 break;
 
-            case '0xCFAA':
+            case 'missingConfig':
                 echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Pogreška</title></head><body style="background-color:#f7f7f7;color:#df5000;font-family:\'Helvetica\', \'Arial\'"><h1>:(</h1><h3>Pogreška sustava Nightsparrow</h3><p>Nightsparrow ne može pronaći datoteku konfiguracije, iako je instaliran. Ponovno pokrenite instalaciju ili ručno dodajte <i>config.php</i> datoteku.</p></body></html>';
                 die();
                 break;
 
-            case '0xAA4A':
-                echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Pogreška</title></head><body style="background-color:#f7f7f7;color:#df5000;font-family:\'Helvetica\', \'Arial\'"><h1>:(</h1><h3>Pogreška sustava Nightsparrow</h3><p>Dogodila se pogreška te Nightsparrow ne može nastaviti s obavljanjem zadatka. Kod pogreške: 0xAA4A</p></body></html>';
-                die();
-                break;
-
-            case '0x3A3A3A':
-                echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Pogreška</title></head><body style="background-color:#f7f7f7;color:#df5000;font-family:\'Helvetica\', \'Arial\'"><h1>:(</h1><h3>Pogreška teme ili komponente za Nightsparrow</h3><p>Neka aktivna tema ili komponenta je napravila pogrešku u komunikaciji sa sustavom Nightsparrow te ne može dobaviti sadržaj i nastaviti s radom. Ustvrdite o kojoj se temi ili komponenti rade i deaktivirajte ju ili <b>vratite Nightsparrow na tvorničke postavke</b>.</p></body></html>';
+            case 'unexpectedResult':
+                echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Pogreška</title></head><body style="background-color:#f7f7f7;color:#df5000;font-family:\'Helvetica\', \'Arial\'"><h1>:(</h1><h3>Pogreška sustava Nightsparrow</h3><p>Dogodila se pogreška te Nightsparrow ne može nastaviti s obavljanjem zadatka. Kod pogreške: 'unexpectedResult'</p></body></html>';
                 die();
                 break;
 
@@ -159,8 +152,7 @@ class Nightsparrow
         $userQuery = "SELECT * FROM nb_users WHERE email = '$email'";
         $res = $dbconn->query($userQuery);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         $matchingUsers = [];
         while ($row = $res->fetch_assoc()) {
@@ -287,10 +279,10 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_users WHERE email = '$email' LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
-            $this->throwError(0xAA4A);
+            $this->throwError('unexpectedResult');
         }
         $users = $res->fetch_array();
 
@@ -307,7 +299,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_users WHERE email = '$email' LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return false;
@@ -330,7 +322,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_sessions WHERE ip = '0.0.0.0' AND useragent = 'FAILED_ATTEMPT_NIGHTSPARROW_LOGIN' AND user = '$user' AND time >= '$time'";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         } else {
             return $res->num_rows;
         }
@@ -347,8 +339,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_settings WHERE engine = '$engine' AND setkey = '$setkey' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return $returnIfNotSet;
@@ -369,8 +360,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_settings WHERE engine = '$engine' AND setkey = '$setkey' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
 
@@ -392,10 +382,10 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_users WHERE id = '$user' LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
-            $this->throwError(0xAA4A);
+            $this->throwError('unexpectedResult');
         }
         $users = $res->fetch_array();
 
@@ -412,10 +402,10 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_sessions WHERE id = '$user' LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
-            $this->throwError(0xAA4A);
+            $this->throwError('unexpectedResult');
         }
         $sessions = $res->fetch_array();
 
@@ -432,7 +422,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_users WHERE id = '$user' LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             $this->throwError('');
@@ -448,7 +438,7 @@ class Nightsparrow
     function getAllSettings()
     {
         $dbconn = $this->mysqliConnect();
-        $res = $dbconn->query("SELECT * FROM nb_settings ORDER BY id DESC") or die($dbconn->error . $this->throwError(0x010010));
+        $res = $dbconn->query("SELECT * FROM nb_settings ORDER BY id DESC") or die($dbconn->error . $this->throwError('databaseError'));
         $res->data_seek(0);
         echo '<table><th>id</th><th>engine</th><th>setkey</th><th>value</th>';
         while ($row = $res->fetch_row()) {
@@ -465,7 +455,7 @@ class Nightsparrow
     function adminGetSiteStructureMap($parent = 0, $caller = 'index')
     {
         $dbconn = $this->mysqliConnect();
-        $res = $dbconn->query("SELECT * FROM nb_pages WHERE parent = $parent ORDER BY id ASC") or die($dbconn->error . $this->throwError(0x010010));
+        $res = $dbconn->query("SELECT * FROM nb_pages WHERE parent = $parent ORDER BY id ASC") or die($dbconn->error . $this->throwError('databaseError'));
         //$structureMap = $res->fetch_all(MYSQLI_ASSOC);
         $structureMap = [];
         $csrfToken = $this->getSessionCSRF($_COOKIE['ns_sid']);
@@ -553,7 +543,7 @@ class Nightsparrow
     function adminGetUserList()
     {
         $dbconn = $this->mysqliConnect();
-        $res = $dbconn->query("SELECT * FROM nb_users ORDER BY name ASC") or die($dbconn->error . $this->throwError(0x010010));
+        $res = $dbconn->query("SELECT * FROM nb_users ORDER BY name ASC") or die($dbconn->error . $this->throwError('databaseError'));
         $structureMap = [];
         while ($row = $res->fetch_assoc()) {
             $structureMap[] = $row;
@@ -619,35 +609,7 @@ class Nightsparrow
     }
 
 
-    /** DEPRECATED: vraća stranicu s nekim ID-jem; koristiti getPageAPI **/
-    function getPage($identifier, $theme)
-    {
-        switch ($identifier) {
-            case 'homepage':
-                $grabFile = 'home.txt';
-                break;
 
-            case '404':
-                $grabFile = '404.txt';
-                break;
-
-            default:
-                $grabFile = 'page.txt';
-                break;
-        }
-        include_once rootdirpath . 'inc/' . 'templates.php';
-        $templates = new Templates();
-        $themefile = rootdirpath . 'template/' . $theme . '/' . $grabFile;
-        $page = $templates->grabTemplateFile($themefile);
-        $variables = array(
-          '%:pageTitle%%' => 'derp',
-          '%:post.snip.url%%' => 'derp3',
-          '%:homepage.intro%%' => $this->getSettingValue('layoutMessages', 'homepageIntro')
-        );
-        $page = $templates->parseTemplateFile($page, $variables);
-        echo $page;
-
-    }
 
     /**briše zadnju stranicu sa zadanim slugom **/
     function deletePageWithSlug($slug)
@@ -657,8 +619,7 @@ class Nightsparrow
         $sql = "DELETE FROM nb_pages WHERE slug = '$slug' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         $dbconn->close();
 
@@ -672,8 +633,7 @@ class Nightsparrow
         $sql = "DELETE FROM nb_users WHERE id = '$id'";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         $time = $dbconn->real_escape_string(time());
         $subject = $this->getSessionUser($_COOKIE['ns_sid']);
@@ -711,8 +671,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_pages WHERE slug = '$identifier' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return 404;
@@ -749,8 +708,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_places WHERE id = '$identifier' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return 404;
@@ -770,8 +728,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_users WHERE id = '$id' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return 404;
@@ -797,8 +754,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_pages WHERE type = '$type' AND status = '$status' ORDER BY id DESC LIMIT $numberOfPages";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return 404;
@@ -827,8 +783,7 @@ class Nightsparrow
         //var_dump($sql);
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return 404;
@@ -853,8 +808,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_pages WHERE slug = '$slug' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             return false;
@@ -874,8 +828,7 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_pages WHERE id = '$id' ORDER BY id DESC LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
             $dbconn->close();
@@ -933,8 +886,7 @@ class Nightsparrow
         $sql = "INSERT INTO nb_pages VALUES(null, '$type', '$showinnav', '$password', '', '$status',  '$time', '$tags', '$category', '$parent',  '$title', '$body', '$author', '$summary', '$sources', '$mainimg', '$slug'); ";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         } else {
             echo '<div class="card-panel"><span class="blue-text text-darken-2"><i class="mdi-image-tag-faces"></i> Stranica uspješno dodana</span></div>';
         }
@@ -985,8 +937,7 @@ class Nightsparrow
         $sql = "UPDATE nb_pages SET title = '$title', status='$status', body = '$body', author = '$author', time = '$time', tags = '$tags', summary = '$summary', slug = '$slug', sources='$sources', showinnav = '$showinnav' WHERE slug = '$originalSlug'";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         } else {
             echo '<div class="card-panel"><span class="blue-text text-darken-2"><i class="mdi-image-tag-faces"></i> Stranica uspješno uređena</span></div>';
         }
@@ -1008,7 +959,7 @@ class Nightsparrow
     {
         $dbconn = $this->mysqliConnect();
         $id = $dbconn->real_escape_string($id);
-        $res = $dbconn->query("DELETE FROM nb_sessions WHERE id = '$id'") or die($dbconn->error . $this->throwError(0x010010));
+        $res = $dbconn->query("DELETE FROM nb_sessions WHERE id = '$id'") or die($dbconn->error . $this->throwError('databaseError'));
 
         $dbconn->close();
 
@@ -1157,11 +1108,11 @@ class Nightsparrow
         $res = $dbconn->query($sql);
         if ($res === false) {
 
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
 
-            $this->throwError(0xAA4A);
+            $this->throwError('unexpectedResult');
         } else {
             $reset = $res->fetch_assoc();
 
@@ -1230,13 +1181,11 @@ class Nightsparrow
         $res = $dbconn->query($sql);
 
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
 
         if ($res === false) {
-            echo $dbconn->error;
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         } else {
             echo '<div class="card-panel"><span class="blue-text text-darken-2"><i class="mdi-image-tag-faces"></i> Korisnik uspješno uređen</span></div>';
         }
@@ -1258,8 +1207,7 @@ class Nightsparrow
             $sql = "INSERT INTO nb_securitylogs VALUES (null, 'passwordChange:AdminPanel', '$subject', '$id', '$time', '$ip')";
             $res = $dbconn->query($sql);
             if ($res === false) {
-                echo $dbconn->error;
-                $this->throwError(0x010010);
+                $this->throwError('databaseError');
             }
 
         }
@@ -1276,10 +1224,10 @@ class Nightsparrow
         $sql = "SELECT * FROM nb_resets WHERE passwordToken = '$token' LIMIT 1";
         $res = $dbconn->query($sql);
         if ($res === false) {
-            $this->throwError(0x010010);
+            $this->throwError('databaseError');
         }
         if ($res->num_rows == 0) {
-            $this->throwError(0xAA4A);
+            $this->throwError('unexpectedResult');
         }
         $reset = $res->fetch_array();
         $dbconn->close();
@@ -1317,7 +1265,7 @@ class Nightsparrow
     {
         $dbconn = $this->mysqliConnect();
         $user = $dbconn->real_escape_string($user);
-        $res = $dbconn->query("SELECT * FROM nb_sessions WHERE user = '$user' ORDER BY id DESC") or die($dbconn->error . $this->throwError(0x010010));
+        $res = $dbconn->query("SELECT * FROM nb_sessions WHERE user = '$user' ORDER BY id DESC") or die($dbconn->error . $this->throwError('databaseError'));
         $sessions = [];
         $res->data_seek(0);
         while ($row = $res->fetch_assoc()) {
