@@ -102,6 +102,7 @@ class Nightsparrow
         switch ($errcode) {
             case 'databaseError':
                 include rootdirpath . 'template/errors/db.php';
+                $dbconn->
                 die();
                 break;
 
@@ -121,7 +122,7 @@ class Nightsparrow
                 break;
 
             case 'unexpectedResult':
-                echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Pogreška</title></head><body style="background-color:#f7f7f7;color:#df5000;font-family:\'Helvetica\', \'Arial\'"><h1>:(</h1><h3>Pogreška sustava Nightsparrow</h3><p>Dogodila se pogreška te Nightsparrow ne može nastaviti s obavljanjem zadatka. Kod pogreške: 'unexpectedResult'</p></body></html>';
+                echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Pogreška</title></head><body style="background-color:#f7f7f7;color:#df5000;font-family:\'Helvetica\', \'Arial\'"><h1>:(</h1><h3>Pogreška sustava Nightsparrow</h3><p>Dogodila se pogreška te Nightsparrow ne može nastaviti s obavljanjem zadatka. Kod pogreške: \'unexpectedResult\'</p></body></html>';
                 die();
                 break;
 
