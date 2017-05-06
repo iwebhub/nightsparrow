@@ -19,7 +19,7 @@ $loggedInUser = $ns->getUserRealname($ns->getSessionUser($_COOKIE['ns_sid']));
 $userID = $ns->getSessionUser($_COOKIE['ns_sid']);
 
 include '../template/admin/index.php';
-echo '<div class="container"><div class="pageEditor">';
+echo '<div class="cont"><div class="pageEditor">';
 $csrfToken = $ns->getSessionCSRF($_COOKIE['ns_sid']);
 
 

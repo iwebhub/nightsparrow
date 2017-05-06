@@ -1,0 +1,42 @@
+.navigation-wrapper {
+	width: calc(98% - 120px);
+	padding: 0 2% 0 0;
+	position: absolute;
+	position: fixed;
+	top: 0;
+	right: 0;
+	background-color: white;
+	z-index: 999;
+}
+.navigation-wrapper .nav {
+	display: inline-block;
+	vertical-align: top;
+	line-height: 60px;
+	padding: 0 10px;
+	float: right;
+	cursor: pointer;
+	color: $black07;
+}
+.logo-wrapper {
+	width: 30px;
+	height: 30px;
+	margin: 15px 0 15px 50px;
+	background-color: black;
+	display: inline-block;
+	vertical-align: top;
+}
+
+@media screen and (max-width: 900px) {
+	.navigation-wrapper {
+		width: calc(98% - 120px);
+	}
+}
+@media screen and (max-width: 600px) {
+	.navigation-wrapper {
+		width: 90%;
+		padding: 0 5%;
+	}
+	.logo-wrapper {
+		margin: 15px 0;
+	}
+}

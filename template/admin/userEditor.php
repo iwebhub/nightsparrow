@@ -1,4 +1,4 @@
-<div class="row">
+<div class="cont">
     <form class="col s12" action="index.php" method="post">
         <input type="hidden" name="action" value="editUser">
         <input type="hidden" name="id" value="<?php echo htmlentities($_GET['id']); ?>">
@@ -9,53 +9,54 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <input id="email" type="email" name="email" class="validate" required value="<?php if (isset($data)) {
+              <label for="email" class="nslabel">Email</label>
+              <input id="email" type="email" name="email" class="nsinputfield" required value="<?php if (isset($data)) {
                     echo $data['email'];
                 } ?>">
-                <label for="email">Email</label>
             </div>
             <div class="input-field col s6">
-                <input id="password" type="password" name="password" class="validate">
-                <label for="password">Promijenite lozinku</label>
+              <label for="password" class="nslabel">Promijenite lozinku</label>
+              <input id="password" type="password" name="password" class="nsinputfield">
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="name" name="name" type="text" class="validate" required value="<?php if (isset($data)) {
+              <label for="name" class="nslabel">Ime i prezime</label>
+              <input id="name" name="name" type="text" class="nsinputfield" required value="<?php if (isset($data)) {
                     echo $data['name'];
                 } ?>">
-                <label for="name">Ime i prezime</label>
             </div>
         </div>
         <?php if ($data['self'] === false) { ?>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="level" name="level" type="number" min="1" max="10" class="validate" required
+                  <label for="level" class="nslabel">Administratorska razina (1-10, veće je jače)</label>
+                  <input id="level" name="level" type="number" min="1" max="10" class="nsinputfield" required
                            value="<?php if (isset($data)) {
                                echo $data['level'];
                            } ?>">
-                    <label for="level">Administratorska razina (1-10, veće je jače)</label>
                 </div>
             </div>
         <?php } ?>
 
         <p>
-            <input type="checkbox" class="banned" name="banned" value="1"
-                   id="banned" <?php
+          <input type="checkbox" class="nscheckbox" name="banned" value="1"
+                   id="banned"  <?php
             if ((isset($data)) && ($data['banned']) == 1) {
                 echo 'checked="true"';
             } ?> />
-            <label for="banned">Zabrani korisniku prijavu na stranicu</label>
+          <label for="banned" class="nslabel if">Zabrani korisniku prijavu na stranicu</label>
+
         </p>
 
 
-        <button class="btn waves-effect waves-light" type="submit">Spremi promjene
-            <i class="mdi-content-send right"></i>
+        <button class="more-themes" type="submit">Spremi promjene &rarr;</i>
         </button>
 
     </form>
+  <br><br>
     <?php if($data['self'] == true){
-        echo '<a href="sessions.php">View active sessions</a>';
+        echo '<a href="sessions.php">Prikaži moje aktivne prijave</a>';
     }
     ?>
 </div>

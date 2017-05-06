@@ -147,6 +147,7 @@ if ($_POST['action'] == 'settingsManager') {
         $ns->addSetting('core', 'siteType', $_POST['siteType']);
         $ns->addSetting('core', 'siteDescription', $_POST['siteDescription']);
         $ns->addSetting('pluginManager', 'pluginManager:Enabled', $_POST['pluginManagerStatus']);
+        $ns->addSetting('pluginManager', 'analytics:Enabled', $_POST['analyzeStatus']);
         $ns->addSetting('generators', 'postsPerPage', $_POST['postsPerPage']);
         $ns->addSetting('core', 'publicRegistrationEnabled', $_POST['registrationStatus']);
         $ns->addSetting('core', 'disablePublicAPI', $_POST['disablePublicAPI']);
@@ -211,14 +212,17 @@ elseif(isset($_GET['deleteAllSessions']) && $_GET['deleteAllSessions'] == 'self'
 }
 
 
-echo $msg;
 
 
-echo '<div class="container"><div class="siteStructureMap">';
+echo '<div class="cont">
+	<div class="dash-wrapper">'.$msg.'
+		<div class="more"><a href="add.php"><button class="more-themes">Dodaj stranicu</button></a></div>
+		<p class="input-desc">Pretraga stranica:</p>
+		<input type="text" name="name" value="" id="search" class="search" placeholder="Traži među stranicama...">';
+
 if (isset($_GET['showSubstructureMap'])) {
-    echo '<h5>Prikazuje se dio strukturnog stabla.</h5><a href="index.php">(prikaži sve)</a>';
+    echo '<h5>Prikazuje se dio strukture web stranice.</h5><a href="index.php">(prikaži sve)</a>';
 }
-echo ' <ul class="collection shadow-z-3">';
 if (isset($_GET['showSubstructureMap'])) {
     $ns->adminGetSiteStructureMap(htmlentities($_GET['showSubstructureMap']), 'index');
 } else {

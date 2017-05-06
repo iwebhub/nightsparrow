@@ -1,0 +1,31 @@
+.cont {
+	width: calc(100% - 175px);
+	max-width: 1100px;
+	margin: 100px auto 100px auto;
+	position: relative;
+}
+.hidden {
+	display: none;
+}
+@media screen and (max-width: 1460px) {
+	.cont {
+		width: calc(95% - 175px);
+		max-width: 1100px;
+		margin: 100px 100px 100px 175px;
+		position: relative;
+	}
+}
+@media screen and (max-width: 900px) {
+	.cont {
+		width: calc(100% - 220px);
+		max-width: 1100px;
+		margin: 100px 100px 100px 170px;
+	}
+}
+@media screen and (max-width: 600px) {
+	.cont {
+		width: 90%;
+		max-width: 1100px;
+		margin: 100px auto;
+	}
+}

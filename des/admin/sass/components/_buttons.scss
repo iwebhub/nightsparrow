@@ -1,0 +1,52 @@
+.activate-theme {
+	text-transform: uppercase;
+	background-color: $turqouise-light;
+	padding: 7px 10px;
+	border-radius: 3px;
+	margin: 15px 15px 0px 15px;
+	color: white;
+	font-size: 10px;
+	cursor: pointer;
+}
+.activate-theme:hover {
+	background-color: $turqouise-dark;
+}
+.delete-theme {
+	font-size: 12px;
+	float: right;
+	margin: 15px 15px 0 0;
+	color: $red-dark;
+	cursor: pointer;
+	padding: 8px 10px;
+}
+.delete-theme:hover {
+	color: $red-light;
+}
+
+.more-themes {
+	background-color: $turqouise-light;
+	padding: 8px 10px;
+	margin-left: 10px;
+	color: white;
+	font-size: 11px;
+	text-transform: uppercase;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.more-themes:hover {
+	background-color: $turqouise-dark;
+}
+.more {
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+
+@media screen and (max-width: 900px) {
+	.more {
+		position: relative;
+		display: block;
+		margin: 30px auto 60px auto;
+		text-align: center;
+	}
+}

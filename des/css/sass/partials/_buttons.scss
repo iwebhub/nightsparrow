@@ -1,0 +1,15 @@
+
+.small-btn {
+	padding: 10px 20px;
+	background-color: $main-dark;
+	color: white;
+	border-radius: 20px;
+	margin-top: 10px;
+	cursor: pointer;
+	-moz-box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+.small-btn:hover {
+	background-color: $main-light;
+}

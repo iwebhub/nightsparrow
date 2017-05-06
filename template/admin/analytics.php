@@ -1,67 +1,44 @@
-<div class="container">
-    <div class="analyticsMap">
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="card grey darken-3 container shadow-z-3">
-                    <span class="card-title white-text">Broj posjeta ikad</span>
-                    <h2 class="white-text"><?php if (isset($data)) {
-                            echo $data['numberOfVisitsEver'];
-                        } ?></h2>
-                </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="card grey darken-3 container shadow-z-3">
-                    <span class="card-title white-text">Broj posjeta u 30 dana</span>
-                    <h2 class="white-text"><?php if (isset($data)) {
-                            echo $data['lastMonthVisits'];
-                        } ?></h2>
-                </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="card grey darken-3 container shadow-z-3">
-                    <span class="card-title white-text">Broj posjeta u 24 sata</span>
-                    <h2 class="white-text"><?php if (isset($data)) {
-                            echo $data['lastDayVisits'];
-                        } ?></h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="card grey darken-3 container shadow-z-3">
-                    <span class="card-title white-text">Najposjećenije ikad</span>
-                    <p class="white-text"><?php if (isset($data)) {
-                            foreach ($data['uriMapMostVisitsEver'] as $visit) {
-                                echo '<a href="' . $visit['uri'] . '" class="light-blue-text" style="text-transform:none !important;">' . $visit['uri'] . '</a> (' . $visit['COUNT(*)'] . ')';
-                                echo '<br>';
-                            }
-                        } ?></p>
-                    </span>
-                </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="card grey darken-3 container shadow-z-3">
-                    <span class="card-title white-text">Najposjećenije u 24 sata</span>
-                    <p class="white-text"><?php if (isset($data)) {
-                            foreach ($data['uriMapMostVisitsDay'] as $visit) {
-                                echo '<a href="' . $visit['uri'] . '" class="light-blue-text" style="text-transform:none !important;">' . $visit['uri'] . '</a> (' . $visit['COUNT(*)'] . ')';
-                                echo '<br>';
-                            }
-                        } ?></p>
-                    </span>
-                </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="card grey darken-1 container shadow-z-3">
-                    <span class="card-title white-text">Alati</span>
-                    <p class="white-text"><a href="?export=html" class="light-blue-text"
-                                             style="text-transform:none !important;">Prikaži sirove
-                            podatke</a><br><br><a href="?export=csv" class="light-blue-text"
-                                                  style="text-transform:none !important;">Izvezi u CSV datoteku</a></p>
-
-                    </span>
-                </div>
-            </div>
-        </div>
+<div class="cont">
+  <div class="more"><a href="?export=html"><button class="more-themes">Prikaži sirove podatke</button></a><a href="?export=csv"><button class="more-themes">Preuzmi kao CSV datoteku</button></a></div>
+  <p class="input-desc">Analitika</p>
+  <input type="text" name="name" value="" id="search" class="search" placeholder="Analitika za..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Analitika za...'" title="danas, jučer, 7 dana...">
+  <div class="analytics-wrapper ">
+    <div class="single s-u">
+      <h1><?php if (isset($data)) {
+          echo $data['numberOfVisitsEver'];
+        } ?></h1>
+      <p class="key">ikad</p>
     </div>
+    <div class="single s-u">
+      <h1><?php if (isset($data)) {
+          echo $data['lastMonthVisits'];
+        } ?></h1>
+      <p class="key">posljednjih 30 dana</p>
+    </div>
+    <div class="single s-u">
+      <h1><?php if (isset($data)) {
+          echo $data['lastDayVisits'];
+        } ?></h1>
+      <p class="key">posljednja 24 sata</p>
+    </div>
+
+    <div class="single-list">
+      <h3>Najposjećenije ikad</h3>
+      <?php if (isset($data)) {
+        foreach ($data['uriMapMostVisitsEver'] as $visit) {
+          echo '<p class="row"><a href="' . $visit['uri'] . '">'.$visit['uri'].'</a> <span>'.$visit['COUNT(*)'].' pregleda</span></p>';
+        }
+      } ?>
+
+    </div>
+    <div class="single-list">
+      <h3>Najposjećenije u posljednja 24 sata</h3>
+      <?php if (isset($data)) {
+        foreach ($data['uriMapMostVisitsDay'] as $visit) {
+          echo '<p class="row"><a href="' . $visit['uri'] . '">'.$visit['uri'].'</a> <span>'.$visit['COUNT(*)'].' pregleda</span></p>';
+        }
+      } ?>
+
+    </div>
+  </div>
 </div>

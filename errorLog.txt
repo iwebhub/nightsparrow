@@ -1,0 +1,118 @@
+
+ ## BEGIN ERROR DUMP ## 
+ Time: 1467742686 Environment: development Server: tardistype40.local Request IP: ::1 User agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:49.0) Gecko/20100101 Firefox/49.0 Request URI: /core/createInstance Error class: databaseError Error type: queryFail 
+ Debug info: 
+ 1
+ Dbconn provided: 
+1
+ ## END ERROR DUMP ##
+ ## BEGIN ERROR DUMP ## 
+ Time: 1467742783 Environment: development Server: tardistype40.local Request IP: ::1 User agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:49.0) Gecko/20100101 Firefox/49.0 Request URI: /core/createInstance Error class: databaseError Error type: queryFail 
+ Debug info: 
+ Array
+(
+    [0] => Array
+        (
+            [file] => /Users/mbm/projekti/Oblak/inc/OblakCore.php
+            [line] => 103
+            [function] => throwError
+            [class] => OblakCore
+            [object] => OblakCore Object
+                (
+                )
+
+            [type] => ->
+            [args] => Array
+                (
+                    [0] => databaseError
+                    [1] => queryFail
+                    [2] => mysqli Object
+                        (
+                            [affected_rows] => -1
+                            [client_info] => mysqlnd 5.0.12-dev - 20150407 - $Id: 7e72f9690b1498a1bead7a637c33a831c0d2f655 $
+                            [client_version] => 50012
+                            [connect_errno] => 0
+                            [connect_error] => 
+                            [errno] => 1065
+                            [error] => Query was empty
+                            [error_list] => Array
+                                (
+                                )
+
+                            [field_count] => 0
+                            [host_info] => Localhost via UNIX socket
+                            [info] => 
+                            [insert_id] => 0
+                            [server_info] => 5.5.42
+                            [server_version] => 50542
+                            [stat] => Uptime: 333  Threads: 1  Questions: 15  Slow queries: 0  Opens: 33  Flush tables: 1  Open tables: 26  Queries per second avg: 0.045
+                            [sqlstate] => 00000
+                            [protocol_version] => 10
+                            [thread_id] => 4
+                            [warning_count] => 0
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [file] => /Users/mbm/projekti/Oblak/index.php
+            [line] => 59
+            [function] => createInstance
+            [class] => OblakCore
+            [object] => OblakCore Object
+                (
+                )
+
+            [type] => ->
+            [args] => Array
+                (
+                    [0] => Educateam d.o.o.
+                    [1] => educateam
+                    [2] => 1
+                    [3] => 
+                    [4] => it@educateam.hr
+                    [5] => 00385958455325
+                    [6] => 
+                    [7] => 
+                    [8] => 
+                    [9] => mbm
+                    [10] => $2y$10$lIiZ5jofdSSBB9E.qVcwF.rnqkxS4Lm/SsP.m1vHAtgm.UW09SqBq
+                    [11] => Mario Borna
+                    [12] => Mjertan
+                )
+
+        )
+
+)
+
+ Dbconn provided: 
+mysqli Object
+(
+    [affected_rows] => -1
+    [client_info] => mysqlnd 5.0.12-dev - 20150407 - $Id: 7e72f9690b1498a1bead7a637c33a831c0d2f655 $
+    [client_version] => 50012
+    [connect_errno] => 0
+    [connect_error] => 
+    [errno] => 0
+    [error] => 
+    [error_list] => Array
+        (
+        )
+
+    [field_count] => 0
+    [host_info] => Localhost via UNIX socket
+    [info] => 
+    [insert_id] => 0
+    [server_info] => 5.5.42
+    [server_version] => 50542
+    [stat] => Uptime: 333  Threads: 1  Questions: 16  Slow queries: 0  Opens: 33  Flush tables: 1  Open tables: 26  Queries per second avg: 0.048
+    [sqlstate] => 00000
+    [protocol_version] => 10
+    [thread_id] => 4
+    [warning_count] => 0
+)
+
+ ## END ERROR DUMP ##

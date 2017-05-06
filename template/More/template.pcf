@@ -5,5 +5,5 @@ license: The Nightsparrow License;
 version: 0.15;
 type: everything;
 description: Tema sa pozadinskom slikom;
-thumbnail: Thumb.jpg;
+thumbnail: Thumb.png;
 based-on: Bjelina;

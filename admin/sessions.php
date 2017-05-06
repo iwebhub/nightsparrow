@@ -37,14 +37,14 @@ if(isset($_GET['deleteSession'])){
     }
     else{
         $ns->deleteSession($_GET['deleteSession']);
-        $msg .= '<div class="card-panel"><span class="blue-text text-darken-2"><i class="mdi-image-tag-faces"></i> Session deleted.</span></div>';
+        $msg .= '<div class="card-panel"><span class="blue-text text-darken-2"><i class="mdi-image-tag-faces"></i> Prijava obrisana.</span></div>';
 
     }
 }
 
 echo $msg;
 
-echo '<div class="container">';
+echo '<div class="cont">';
 $ns->gen->generateSessionsTable($ns->getAllSessions($userID));
 
 echo '</div>';

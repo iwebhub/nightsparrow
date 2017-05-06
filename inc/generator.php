@@ -250,16 +250,16 @@ class PageGenerator extends Nightsparrow
                 $n = $n - 1;
             }
         }
-        echo '<h5>Active sessions (' . $n . ')</h5><a href="index.php?deleteAllSessions=self&csrfToken=' . $csrfToken . '" class="waves-effect waves-light btn">Terminate all</a>';
-        echo '<table><tr><th>Browser</th><th>Time</th><th>Expires</th><th>IP</th><th>Cookie ID (first 8 chars.)</th><th>Actions</th></tr>';
+        echo '<h2 class="nslabel">Aktivne prijave (' . $n . ')</h2><a href="index.php?deleteAllSessions=self&csrfToken=' . $csrfToken . '" class="delete-object">Odjavi me sa svih uređaja</a>';
+        echo '<table><tr><th>Preglednik</th><th>Vrijeme</th><th>Istek</th><th>IP</th><th>Cookie ID (prvih 8 znakova)</th><th>Radnje</th></tr>';
         foreach ($sessions as $session) {
             if ($session['useragent'] == 'FAILED_ATTEMPT_NIGHTSPARROW_LOGIN') {
                 continue;
             }
             $device = parse_user_agent($session['useragent']);
-            echo '<tr><td>' . $device['browser'] . ' ' . $device['version'] . ' on ' . $device['platform'] . '</td><td> <script> moment.locale(\'en\');var relative = moment.unix('.$session['time'].').fromNow();document.write(relative);</script></td><td><script> moment.locale(\'en\');var relative = moment.unix('.$session['expires'].').fromNow();document.write(relative);</script></td><td>' . $session['ip'] . '</td><td>' . substr($session['cookieid'],
+            echo '<tr><td>' . $device['browser'] . ' ' . $device['version'] . ' na platformi ' . $device['platform'] . '</td><td> <script> moment.locale(\'hr\');var relative = moment.unix('.$session['time'].').fromNow();document.write(relative);</script></td><td><script> moment.locale(\'hr\');var relative = moment.unix('.$session['expires'].').fromNow();document.write(relative);</script></td><td>' . $session['ip'] . '</td><td>' . substr($session['cookieid'],
                 0,
-                8) . '<td><a href="?deleteSession=' . $session['id'] . '&csrfToken=' . $csrfToken . '">Terminate</a>';
+                8) . '<td><a href="?deleteSession=' . $session['id'] . '&csrfToken=' . $csrfToken . '" style="color: #C0392B;">Ukloni</a>';
         }
         echo '</table>';
 

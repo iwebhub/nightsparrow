@@ -1,0 +1,40 @@
+.dropdown {
+	position: absolute;
+	top: 60px;
+	right: -30px;
+	background-color: white;
+	width: 300px;
+	padding: 15px 0;
+	box-shadow: 0 0 20px $black02;
+	z-index: 5;
+	display: none;
+}
+.dropdown ul li {
+	display: block;
+	margin: 0px 15px;
+	padding: 7px 0;
+	font-size: 14px;
+	border-bottom: 1px solid $black01;
+	color: $black07;
+	font-weight: 400;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.dropdown ul li:last-child {
+	border: none;
+}
+.dropdown ul li:hover {
+	background-color: $black01;
+	padding-left: 10px;
+}
+
+.triangle {
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: -10px;
+	right: 43px;
+	border-style: solid;
+	border-width: 0 10px 10px 10px;
+	border-color: transparent transparent white transparent;
+}

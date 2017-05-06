@@ -33,16 +33,17 @@ if ($ns->getSettingValue("pluginManager", "pluginManager:Enabled") == 1) {
         $analyze = new Analyze();
 
     } else {
-        die("<h1>Analitika nije omogućena.</h1><a href=\"settings-manager.php\">Postavke</a>");
+        die("<div class='cont'><h1>Analitika nije omogućena.</h1><a href=\"settings-manager.php\">Postavke</a></div>");
     }
 } else {
-    die("<h1>Dodaci nisu omogućeni.</h1><a href=\"settings-manager.php\">Postavke</a>");
+    die("<div class='cont'><h1>Dodaci nisu omogućeni.</h1><a href=\"settings-manager.php\">Postavke</a></div>");
 }
+
 
 
 if (isset($_GET['export'])) {
     if ($_GET['export'] == 'html') {
-        echo '<div class="container">';
+        echo '<div class="cont">';
     }
     $data = $analyze->getDataExportDump($_GET['export']);
     if ($_GET['export'] == 'html') {

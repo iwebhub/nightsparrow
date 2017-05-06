@@ -30,8 +30,13 @@ $loggedInUser = $ns->getUserRealname($ns->getSessionUser($_COOKIE['ns_sid']));
 $userID = $ns->getSessionUser($_COOKIE['ns_sid']);
 
 include '../template/admin/users.php';
-echo '<div class="container"><div class="userStructureMap shadow-z-3">';
-echo ' <ul class="collection">';
+echo '
+<div class="cont">
+		<div class="more"><a href="addUser.php"><button class="more-themes">Dodaj korisnika</button></a></div>
+		<p class="input-desc">Traži korisnika:</p>
+		<input type="text" name="name" value="" id="search" class="search" placeholder="Traži među korisnicima...">
+		<div class="users-wrapper">';
+
 $ns->adminGetUserList();
-echo '</ul></div></div>';
+echo '</div></div>';
 include '../template/admin/footer.php';

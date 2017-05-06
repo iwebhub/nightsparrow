@@ -4,6 +4,6 @@ bundle: NightsparrowMini;
 license: MIT Licenca;
 version: 0.15;
 type: everything;
-description: Osnovna tema za Nightsparrow, u tamnijoj boji;
-thumbnail: Tama.jpg;
+description: Tamnija verzija osnovne teme;
+thumbnail: Tama.png;
 based-on: Bjelina;

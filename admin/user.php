@@ -38,14 +38,14 @@ $data['banned'] = $ns->getUserDataAPI($_GET['id'], 'banned');
 
 
 include '../template/admin/index.php';
-echo '<div class="container"><div class="pageEditor">';
+echo '<div class="cont">';
 $csrfToken = $ns->getSessionCSRF($_COOKIE['ns_sid']);
 if ($data['self'] == false) {
-    echo '<form action="index.php" method="post"><input type="hidden" name="csrfToken" value="' . $csrfToken . '"><input type="hidden" name="deleteUser" value="' . $_GET['id'] . '"><input type="submit" class="btn btn-warning" value="&#x2715; Obriši korisnika"></form>';
+    echo '<form action="index.php" method="post"><input type="hidden" name="csrfToken" value="' . $csrfToken . '"><input type="hidden" name="deleteUser" value="' . $_GET['id'] . '"><input type="submit" class="delete-object" value="&#x2715; Obriši korisnika"></form>';
 }
 include '../template/admin/userEditor.php';
 
 
-echo '</div></div>';
+echo '</div>';
 
 include '../template/admin/footer.php';

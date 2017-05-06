@@ -24,8 +24,12 @@ if (isset($_GET['activate'])) {
 }
 include '../template/admin/header.php';
 include '../template/admin/navigation.php';
-echo '<p><b>Trenutno aktivna tema:</b> ' . $ns->getSettingValue('core', 'siteActiveTheme') . '</p>';
-echo '<div class="container"><div class="row">';
+//echo '<p><b>Trenutno aktivna tema:</b> ' . $ns->getSettingValue('core', 'siteActiveTheme') . '</p>';
+echo '	<div class="cont">
+	<div class="more"><a href="https://phabulous.pulsir.eu/w/nightsparrow/"><button class="more-themes">Nabavi još tema</button></a></div>
+	<p class="input-desc">Pretraži instalirane teme:</p>
+	<input type="text" name="name" value="" id="search" class="search" placeholder="Traži među temama...">
+	<div class="themes-wrapper">';
 $templates->adminGenerateTemplatePicker();
 echo '</div></div>';
 include '../template/admin/footer.php';

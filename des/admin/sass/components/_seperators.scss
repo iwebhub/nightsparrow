@@ -1,0 +1,14 @@
+.nav-sep {
+	width: 1px;
+	height: 30px;
+	margin: 15px;
+	background-color: $black03;
+	display: inline-block;
+	vertical-align: top;
+}
+.page-sep {
+	width: calc(100% - 30px);
+	margin: 10px auto 0 auto;
+	background-color: $black01;
+	height: 1px;
+}

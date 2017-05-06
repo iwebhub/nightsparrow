@@ -1,0 +1,17 @@
+input[class=search] {
+	padding: 10px 0;	
+	font-size: 25px;
+	font-weight: 300;
+	transition: all 0.4s ease;
+	max-width: 100%;
+	border-bottom: 1px solid transparent;
+}
+input[class=search]:focus {
+	margin-bottom: 30px;
+	border-color: $turqouise-dark;
+}
+@media screen and (max-width: 600px) {
+	input[class=search] {
+		width: 100%;
+	}
+}

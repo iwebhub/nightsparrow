@@ -1,0 +1,18 @@
+.pagination-wrapper {
+	margin: 5px 0;
+	padding: 5px 0;
+}
+.pagination-wrapper ul {
+	cursor: pointer;
+}
+.pagination-wrapper ul li {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 5px 0 0;
+	font-size: 13px;
+	color: $black05;
+	font-weight: 500;
+}
+.pagination-wrapper ul li:hover {
+	color: $turqouise-dark;
+}

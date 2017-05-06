@@ -19,6 +19,8 @@ $userID = $ns->getSessionUser($_COOKIE['ns_sid']);
 $pageTitle = 'Tablica postavki i revizija';
 include '../template/admin/header.php';
 include '../template/admin/navigation.php';
+echo '<div class="cont">';
 echo '<h4>Revizije postavki</h4>';
 $ns->getAllSettings();
+echo '</div>';
 include '../template/admin/footer.php';

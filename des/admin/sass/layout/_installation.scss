@@ -1,0 +1,190 @@
+.install-wrapper {
+	text-align: center;
+	width: 100%;
+	max-width: 900px;
+	margin: 35vh auto 10vh auto;
+}
+.install-wrapper p {
+	font-size: 16px;
+	color: $black05;
+	padding: 10px 0;
+	font-weight: 500;
+}
+.install-wrapper h1 {
+	font-size: 50px;
+	color: $black08;
+	padding: 30px 15px;
+	font-weight: 100;
+}
+.install-wrapper button {
+	margin-top: 20px;
+}
+.norm h1 {
+	padding: 10px 30px;
+}
+.norm {
+	margin-top: 20vh;
+}
+
+.install-form {
+	margin-top: 10vh;
+}
+
+.full-in {
+	width: 46%;
+	padding: 10px 2%;
+	margin: 0 auto 20px auto;
+	background-color: white;
+	display: block;
+}
+
+.half-in {
+	width: 50%;
+	margin: 0 auto 20px auto;
+}
+.half-in input {
+	width: 40%;
+	padding: 10px 4%;
+	background-color: white;
+	display: inline-block;
+	vertical-align: top;
+}
+.half-in input:last-child {
+	margin-left: 4%;
+}
+.hint {
+	display: block;
+	width: 200px;
+	margin-top: -45px;
+	margin-bottom: 29px;
+	padding-right: 20px;
+	text-align: right;
+	color: $black02;
+	font-size: 14px;
+	font-weight: 400;
+}
+.hideme {
+	opacity: 0;
+	transition: all 0.4s ease;
+}
+.action {
+	width: 53%;
+	margin: 2vh auto 0 auto;
+	text-align: left;
+}
+.action p {
+	display: inline-block;
+	margin-left: 20px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	color: $black05;
+}
+.action .delete-theme {
+	margin-right: 0;
+}
+/* List */
+.steps-list {
+	position: absolute;
+	top: 35vh;
+	left: 30px;
+}
+.steps-list ul li {
+	font-weight: 300;
+	font-size: 15px;
+	color: $black05;
+	line-height: 35px;
+	padding-left: 15px;
+	border-left: 4px solid $black01;
+}
+.steps-list .done {
+	border-left: 4px solid $turqouise-dark;
+}
+/*purpose*/ 
+.selec {
+	max-width: 1100px;
+}
+.select-purpose {
+	margin-top: 10vh;
+}
+.select-purpose .single {
+	width: 18%;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 1%;
+	padding: 30px 0;
+	cursor: pointer;
+	border-radius: 2px;
+	border: 1px solid transparent;
+}
+.select-purpose .single:hover {
+	background-color: white;
+	border: 1px solid $black01;
+}
+.select-purpose .single img {
+	width: 90px;
+	height: 90px;
+	margin-bottom: 15px;
+}
+.select-purpose .single p {
+	padding: 0 15px;
+}
+.not-ab {
+	margin-top: 10vh;
+}
+.txt-a {
+	max-width: 56%;
+	height: 60px;
+	max-height: 300px;
+	transition: height 0.3s ease;
+}
+.txt-a:focus {
+	height: 120px;
+}
+
+.hint-text {
+	width: 80%;
+	max-width: 600px;
+	padding: 0 15px;
+	//background-color: white;
+	//box-shadow: 0 0 20px $black01;
+	margin: -5vh auto 5vh auto;
+	display: block;
+	opacity: 0;
+	transition: all 0.8s ease;
+}
+.hint-text p {
+	z-index: 997;
+	font-size: 14px;
+	font-weight: 300;
+	color: $black07;
+}
+
+@media screen and (max-width: 900px) {
+	.norm {
+		margin-top: 10vh;
+	}
+	.norm h1 {
+		font-size: 40px;
+	}
+	.hint {
+		margin: 0 0 20px 0;
+		display: inline-block !important;
+		text-align: left;
+		width: auto;
+	}
+	.install-wrapper  {
+		margin-top: 20vh;
+	}
+	.install-wrapper h1 {
+		font-size: 30px;
+	}
+	.steps-list {
+		position: initial;
+		display: block;
+		margin: 50px auto;
+		width: 80%;
+		max-width: 583px;
+		left: 0;
+	}
+}

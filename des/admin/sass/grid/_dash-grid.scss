@@ -1,0 +1,64 @@
+.pages-wrapper {
+	margin-top: 20px;
+}
+.single-wrapper {
+	background-color: white;
+	padding: 15px 0;
+	margin-bottom: 20px;
+	border-radius: 3px;
+	position: relative;
+}
+.single-wrapper h2 {
+	padding: 5px 0 15px 15px;
+	font-size: 25px;
+	color: $black08;
+	font-weight: 400;
+}
+.single-wrapper h2 span {
+	float: right;
+	margin-right: 15px;
+}
+.single-wrapper h2 span img {
+	width: 17px;
+	height: 17px;
+	margin-left: 15px;
+	cursor: pointer;
+}
+.single-wrapper .info {
+	margin-left: 15px;
+	padding: 2px 10px;
+	border-left: 4px solid $silver;
+}
+.single-wrapper .info p {
+	font-weight: 500;
+	font-size: 12px;
+	color: $black05;
+	padding: 2px 0;
+}
+.single-wrapper .posts-wrapper p {
+	margin: 0px 15px;
+	padding: 5px 0;
+	line-height: 30px;
+	font-size: 14px;
+	color: $black07;
+	border-bottom: 1px solid $black01;
+}
+.single-wrapper .posts-wrapper p:last-child {
+	border: none;
+	padding-bottom: 0;
+}
+.single-wrapper .posts-wrapper p img {
+	width: 13px;
+	height: 13px;
+}
+.single-wrapper .posts-wrapper p span {
+	float: right;
+}
+.thumb {
+	width: 20px;
+	height: 20px;
+	margin: 0 15px 0 0;
+}
+.post-thumb {
+	margin-right: 10px;
+}
